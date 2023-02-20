@@ -6,19 +6,26 @@ dic.append([])
 linha = arquivo.readline()
 i = 0
 
-elf = [0, 0]
-
+## Part 1
+elfTop = [0, 0]
+elfTopThree = [0, 0, 0]
 while linha.__len__() != 0:
     if linha != '\n':
         dic[i].append(int(linha.split()[0]))
     else:
-        if sum(dic[i]) > sum(dic[elf[0]]):
-            elf[0] = i
-            elf[1] = sum(dic[i])
-        print("Elfo", i," -> ", sum(dic[i]))
+        soma = sum(dic[i])
+        if soma > sum(dic[elfTop[0]]):
+            elfTop[0] = i
+            elfTop[1] = soma
+        if soma > elfTopThree[0] or soma > elfTopThree[1] or soma > elfTopThree[2]:
+            elfTopThree[elfTopThree.index(min(elfTopThree))] = soma
         dic.append([])
         i += 1
 
     linha = arquivo.readline()
 
-print("Elfo mais gordo: ", elf)
+print("[Elf number, Calories] -> ", elfTop)
+print("Total snaks from top 3 -> ", sum(elfTopThree))
+
+## Part 2
+
